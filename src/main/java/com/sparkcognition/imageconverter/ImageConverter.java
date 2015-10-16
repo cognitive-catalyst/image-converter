@@ -62,9 +62,16 @@ public class ImageConverter {
     }
 
     public static void main(String[] args) {
+        if (args.length < 1) {
+            System.err.println("Insufficient number of arguments");
+            System.exit(-1);
+        }
         String base = System.getProperty("user.dir");
         File inFile = new File(args[0]);
-        File outFile = new File(base, "out.jpg");
+        int extensionIndex = args[0].lastIndexOf(".");
+        String outfilename = args[0].substring(0, extensionIndex) + ".jpg";
+        System.out.println("Converting to file: " + outfilename);
+        File outFile = new File(outfilename);
         convertToJPG(inFile, outFile);
     }
 }
